@@ -1,47 +1,206 @@
-# Getting Started with Create React App
+# SETUP BACKEND APPLICATION
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-## Available Scripts
+- Install Docker
 
-In the project directory, you can run:
+- Running Command "npm install typeorm pg", for install dependency of typeorm for working with postgres database.
 
-### `yarn start`
+```sh
+$ npm install typeorm pg
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Initialized Typescript in project, run the command "npx tsc --init"
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```sh
+$ npx tsc --init
+```
 
-### `yarn test`
+### Setup DB
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- run the command "npm run typeorm migration:create -n CreateClient"
 
-### `yarn build`
+```sh
+$ npm run typeorm migration:create -n CreateClient
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Após a criação das migrations que ficam na pasta:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`src/database/migration`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- abra o arquivo criado com o nome de (nome-criado-automaticamente)-CreateClient.ts.
 
-### `yarn eject`
+1. E no trecho do código citado abaixo copie a palavra **Table**, exemplo:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Era assim:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+import { MigrationInterface, QueryRunner} from 'typeorm';
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Fica assim:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+```
 
-## Learn More
+2. E no trecho do código citado abaixo copie a palavra **default**, exemplo:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Era assim:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-# bemol-challenge-api
+```
+export class
+```
+
+Fica assim:
+
+```
+export default class
+```
+
+3. Copie o trecho do código citado abaixo:
+
+```
+await queryRunner.createTable(
+      new Table({
+        name: 'clients',
+        columns: [
+          {
+            name: 'id',
+            type: 'varchar',
+            isPrimary: true,
+            generationStrategy: 'uuid',
+          },
+          {
+            name: 'name',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'email',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'cep',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'public_place',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'complement',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'district',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'locality',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'uf',
+            type: 'varchar',
+            isNullable: true,
+          },
+        ],
+      }),
+    );
+```
+
+4. Copie o código abaixo e cole no local indicado
+
+```
+await queryRunner.dropTable('clients');
+```
+
+Cole aqui:
+
+```
+ public async down(queryRunner: QueryRunner): Promise<void> {
+    aqui .... await queryRunner.dropTable('clients');
+  }
+```
+
+- O arquivo final deve ficar mais ou menos assim:
+
+```
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+
+export default class CreateClient1615493149783 implements MigrationInterface {
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.createTable(
+      new Table({
+        name: 'clients',
+        columns: [
+          {
+            name: 'id',
+            type: 'varchar',
+            isPrimary: true,
+            generationStrategy: 'uuid',
+          },
+          {
+            name: 'name',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'email',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'cep',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'public_place',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'complement',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'district',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'locality',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'uf',
+            type: 'varchar',
+            isNullable: true,
+          },
+        ],
+      }),
+    );
+  }
+
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable('clients');
+  }
+}
+
+```
+
+- run the command "npm run typeorm migration:run"
+
+```
+npm run typeorm migration:run
+```
