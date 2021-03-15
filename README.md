@@ -8,6 +8,11 @@ const api = axios.create({
 });
 ```
 
+- Rode o comando abaixo para executar a aplicação, rode no bash
+```
+yarn start
+```
+
 - As telas estão sem responsividade.
 
 ![Telas Aplicativo](https://github.com/jnerydesigner/bemol-challenge-web/blob/main/telas/tela01.png)
