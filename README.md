@@ -10,5 +10,10 @@ const api = axios.create({
 
 - As telas estão sem responsividade.
 
+![Telas Aplicativo](https://github.com/jnerydesigner/bemol-challenge-web/blob/main/telas/tela01.png)
+![Telas Aplicativo](https://github.com/jnerydesigner/bemol-challenge-web/blob/main/telas/tela02.png)
+![Telas Aplicativo](https://github.com/jnerydesigner/bemol-challenge-web/blob/main/telas/tela03.png)
+![Telas Aplicativo](https://github.com/jnerydesigner/bemol-challenge-web/blob/main/telas/tela04.png)
+
 
 
