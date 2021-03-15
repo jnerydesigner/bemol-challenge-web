@@ -91,7 +91,7 @@ const contato: React.FC = () => {
         uf: data.uf,
       });
       if (results) {
-        history.push('/');
+        history.push('/result');
       }
     },
     [nameClient, history],
@@ -103,8 +103,8 @@ const contato: React.FC = () => {
       <ContainerInteracao>
         <ContainerForm>
           <TextTitleForm>
-            Oi {enderecoClient.cep}, digite seus dados para maior Interação com
-            a Bemol.
+            Oi {nameClient.client}, digite seus dados para maior Interação com a
+            Bemol.
           </TextTitleForm>
 
           <Form onSubmit={handleSubmit(onSubmit)}>

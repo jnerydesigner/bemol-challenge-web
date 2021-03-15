@@ -24,7 +24,7 @@ const ColInteractive: React.FC = () => {
         <ContainerLogo>
           <img src={LogoBemol} alt="Logo da Bemol" />
         </ContainerLogo>
-        <Link to="/result">
+        <Link to="/">
           <FcHome size={40} />
         </Link>
         <h2>Nossos Canais de Mídia para tirar sua dúvida</h2>
